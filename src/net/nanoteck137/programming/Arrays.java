@@ -36,6 +36,9 @@ public class Arrays {
         System.out.println("6: Hur många namn börjar på bokstaven L i names?");
         System.out.printf("\tSvar: %d\n", countNamesStartWith('L'));
 
+        System.out.println("7: Hur många namn är fem bokstäver långa i names?");
+        System.out.printf("\tSvar: %d\n", countNamesWithLength(5));
+
     }
 
     private static int searchForNumber(int number) {
@@ -142,6 +145,18 @@ public class Arrays {
             }
         }
         
+        return result;
+    }
+
+    private static int countNamesWithLength(int length) {
+        int result = 0;
+
+        for (int i = 0; i < names.length; i++) {
+            if(names[i].length() == length) {
+                result++;
+            }
+        }
+
         return result;
     }
 
