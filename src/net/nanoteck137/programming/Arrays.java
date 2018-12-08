@@ -58,6 +58,9 @@ public class Arrays {
 
         System.out.println("9: Hur många unika namn finns det i names?");
         System.out.printf("\tSvar: %d\n", uniqueNames());
+
+        System.out.println("10: Vilket är det namn som förekommer flest gånger i names?");
+        System.out.printf("\tSvar: %s\n", mostFrequentName());
     }
 
     /**
@@ -241,6 +244,31 @@ public class Arrays {
         }
 
         return result;
+    }
+
+    /**
+     * Counts the most frequent name in the names array
+     * @return Returns the frequent name
+     */
+    private static String mostFrequentName() {
+        int biggestIndex = 0;
+        int biggestFreq = 0;
+
+        for (int i = 0; i < names.length; i++) {
+            int currentFreq = 0;
+
+            for (int j = 0; j < names.length; j++) {
+                if(names[i].equals(names[j]))
+                    currentFreq++;
+            }
+
+            if(currentFreq > biggestFreq) {
+                biggestFreq = currentFreq;
+                biggestIndex = i;
+            }
+        }
+
+        return names[biggestIndex];
     }
 
 }
