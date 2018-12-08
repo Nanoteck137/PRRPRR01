@@ -55,6 +55,9 @@ public class Arrays {
             }
         }
         System.out.print("\n");
+
+        System.out.println("9: Hur många unika namn finns det i names?");
+        System.out.printf("\tSvar: %d\n", uniqueNames());
     }
 
     /**
@@ -209,8 +212,32 @@ public class Arrays {
     private static int[] generateListWithFreqForNumbers() {
         int[] result = new int[10];
 
-        for(int i = 0; i < numbers.length; i++){
+        for (int i = 0; i < numbers.length; i++){
             result[numbers[i]]++;
+        }
+
+        return result;
+    }
+
+    /**
+     * Searches the names array for all unique names
+     * @return Returns the number of unique names
+     */
+    private static int uniqueNames() {
+        int result = 0;
+
+        for(int i = 0; i < names.length; i++) {
+            int j;
+
+            for (j = 0; j < names.length; j++) {
+                if(names[i].equals(names[j])) {
+                    break;
+                }
+            }
+
+            if (i == j) {
+                result++;
+            }
         }
 
         return result;
