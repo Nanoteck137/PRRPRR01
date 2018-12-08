@@ -27,6 +27,15 @@ public class Arrays {
 
         System.out.printf("\tSvar: %d finns det flest av med %dst och %d finns det minst av med %dst\n", maxNumber, maxFreq, minNumber, minFreq);
 
+        System.out.println("4: På vilket index finns namnet Drusilla i names?");
+        System.out.printf("\tSvar: %d\n", searchForNameIndex("Drusilla"));
+
+        System.out.println("5: Vad är summan av alla jämna tal i numbers?");
+        System.out.printf("\tSvar: %d\n", sumAllEvenNumbers());
+
+        System.out.println("6: Hur många namn börjar på bokstaven L i names?");
+        System.out.printf("\tSvar: %d\n", countNamesStartWith('L'));
+
     }
 
     private static int searchForNumber(int number) {
@@ -61,7 +70,7 @@ public class Arrays {
             indexList[i] = i;
         }
 
-        //Bubble sort
+        //Bubble sort algorithm (https://brilliant.org/wiki/sorting-algorithms/)
 
         boolean stop = false;
         while(!stop) {
@@ -95,8 +104,45 @@ public class Arrays {
 
         int minFreq = freqList[0];
         int minNumber = indexList[0];
+
         return new int[] { maxNumber, maxFreq, minNumber, minFreq };
     }
 
+    private static int searchForNameIndex(String name) {
+        int result = 0;
+
+        for (int i = 0; i < names.length; i++) {
+            if(names[i].equals(name)) {
+                result = i;
+                break;
+            }
+        }
+        
+        return result;
+    }
+
+    private static int sumAllEvenNumbers() {
+        int result = 0;
+
+        for (int i = 0; i < numbers.length; i++) {
+            if(numbers[i] % 2 == 0) {
+                result += numbers[i];
+            }
+        }
+        
+        return result;
+    }
+
+    private static int countNamesStartWith(char c) {
+        int result = 0;
+
+        for (int i = 0; i < names.length; i++) {
+            if(names[i].charAt(0) == c) {
+                result++;
+            }
+        }
+        
+        return result;
+    }
 
 }
