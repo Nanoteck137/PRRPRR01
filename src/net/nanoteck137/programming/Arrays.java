@@ -2,7 +2,10 @@ package net.nanoteck137.programming;
 
 public class Arrays {
 
+    //A private array with some numbers
     private static final int[] numbers = {1,1,1,2,6,7,8,4,3,7,8,9,3,1,3,7,8,5,3,4,8,9,6,4,2,4,7,9,7,4,3,2,3,6,7,8,7,7,5,7,9,6,1,4,0,8,6,5,6,8,9,0,7,5,4,3,2,4,5,9,8,5,9,8,8,4,5,6,7,8,9,0,9,0,9,7,5,2,1,2,3,4,5,4,4,5,3,4,5,0,8,7,0,7,9,7,0,6,5,4,7};
+
+    //A private array with some names
     private static final String[] names = {"Crystal","Tam","Ed","Beulah","Daina","Benjamin","Kia","Clelia","Cassy","Gita","Celsa","Karoline","Talitha","Lewis","Betsy","Colin","Glendora","Carola","Rosalba","Jeanie","Yevette","Armand","Neal","Lilla","Dorethea","Delta","Maye","Nikita","Shoshana","Carola","Margie","Haywood","Venessa","Natacha","Gilbert","Kandi","Tyisha","Tammie","Blossom","Penney","Diana","Audrey","Willard","Zoraida","Drusilla","Jacquline","Cyndy","Janiece","Tressie","Kami","Lashanda","Leann","Tom","Santana","Junita","Gisela","Tom","Marquerite","Bryant","Lauralee","Yael","Kelle","Samantha","Tom","Meta","Lanette","Wanetta","Carola","Jana","Neal","Brady","Rigoberto","Felicia","Hellen","Georgeann","Carola","Isaias","Ellis","Roseanne","Lenard","Ela","Ophelia","Alesha","Mafalda","Flor","Kelsi","Autumn","Sondra","Pasty","Jacquelyne","Benjamin","Emmie","Mickie","Lang","Jamee","Felice","Daniella","Carola","Nathalie","Genevive"};
 
     /**
@@ -41,6 +44,17 @@ public class Arrays {
         System.out.println("7: Hur många namn är fem bokstäver långa i names?");
         System.out.printf("\tSvar: %d\n", countNamesWithLength(5));
 
+        System.out.println("8: Hur många finns det av varje tal i numbers?");
+        System.out.print("\tSvar: ");
+        int[] freqList = generateListWithFreqForNumbers();
+        for (int i = 0; i < freqList.length; i++) {
+            System.out.printf("%d: %dst", i, freqList[i]);
+
+            if(i < freqList.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.print("\n");
     }
 
     /**
@@ -80,13 +94,9 @@ public class Arrays {
      * @return An array with the information (Format: Min number, Min frequency, Max number, Max frequency)
      */
     private static int[] searchMinMaxNumber() {
-        int[] freqList = new int[10];
+        int[] freqList = generateListWithFreqForNumbers();
+
         int[] indexList = new int[10];
-
-        for(int i = 0; i < numbers.length; i++){
-            freqList[numbers[i]] += 1;
-        }
-
         for (int i = 0; i < indexList.length; i++) {
             indexList[i] = i;
         }
@@ -114,9 +124,8 @@ public class Arrays {
                 }
             }
 
-            if(switches == 0) {
+            if(switches == 0)
                 stop = true;
-            }
         }
 
         int minFreq = freqList[0];
@@ -154,9 +163,8 @@ public class Arrays {
         int result = 0;
 
         for (int i = 0; i < numbers.length; i++) {
-            if(numbers[i] % 2 == 0) {
+            if(numbers[i] % 2 == 0)
                 result += numbers[i];
-            }
         }
         
         return result;
@@ -171,9 +179,8 @@ public class Arrays {
         int result = 0;
 
         for (int i = 0; i < names.length; i++) {
-            if(names[i].charAt(0) == c) {
+            if(names[i].charAt(0) == c)
                 result++;
-            }
         }
         
         return result;
@@ -188,9 +195,22 @@ public class Arrays {
         int result = 0;
 
         for (int i = 0; i < names.length; i++) {
-            if(names[i].length() == length) {
+            if(names[i].length() == length)
                 result++;
-            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Generates a list with how frequent numbers occur
+     * @return Returns a list with the frequencies
+     */
+    private static int[] generateListWithFreqForNumbers() {
+        int[] result = new int[10];
+
+        for(int i = 0; i < numbers.length; i++){
+            result[numbers[i]]++;
         }
 
         return result;
