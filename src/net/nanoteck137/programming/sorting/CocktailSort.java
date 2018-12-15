@@ -2,6 +2,10 @@ package net.nanoteck137.programming.sorting;
 
 public class CocktailSort {
 
+    /**
+     * Sorts the list with the Cocktail Sort algorithm
+     * @param list The list to be sorted NOTE: passed as a reference
+     */
     public static void cocktailSort(int[] list) {
         boolean swapped = true;
 

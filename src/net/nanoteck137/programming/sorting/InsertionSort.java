@@ -2,6 +2,10 @@ package net.nanoteck137.programming.sorting;
 
 public class InsertionSort {
 
+    /**
+     * Sorts the list with the Bubble Sort algorithm
+     * @param list The list to be sorted NOTE: passed as a reference
+     */
     public static void insertionSort(int[] list) {
         for (int i = 1; i < list.length; i++) {
             int current = list[i];

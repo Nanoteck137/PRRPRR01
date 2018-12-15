@@ -2,6 +2,10 @@ package net.nanoteck137.programming.sorting;
 
 public class BubbleSort {
 
+    /**
+     * Sorts the list with the Bubble Sort algorithm
+     * @param list The list to be sorted NOTE: passed as a reference
+     */
     public static void bubbleSort(int[] list) {
         boolean stop = false;
         while(!stop) {

@@ -2,6 +2,10 @@ package net.nanoteck137.programming.sorting;
 
 public class SelectionSort {
 
+    /**
+     * Sorts the list with the Bubble Sort algorithm
+     * @param list The list to be sorted NOTE: passed as a reference
+     */
     public static void selectionSort(int[] list) {
         for (int i = 0; i < list.length - 1; i++) {
             int minIndex = i;
