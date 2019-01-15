@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fa408f5-9c8c-4315-89a5-44fd7381b000" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/BubbleSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/CocktailSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/CocktailSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/InsertionSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/InsertionSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/SelectionSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/nanoteck137/programming/sorting/SelectionSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net/nanoteck137/programming/SwitchCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/net/nanoteck137/programming/SwitchCase.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,12 +38,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="7" />
-          <entry key="java" value="3346" />
+          <entry key="java" value="3590" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3346" />
+          <entry key="JAVA" value="3590" />
           <entry key="PLAIN_TEXT" value="7" />
         </counts>
       </usages-collector>
@@ -59,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/net/nanoteck137/programming/SwitchCase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+            <state relative-caret-position="371">
+              <caret line="65" column="65" selection-start-line="65" selection-start-column="65" selection-end-line="65" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -128,7 +123,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547539494071" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1547539709184" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -308,8 +303,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/nanoteck137/programming/SwitchCase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+        <state relative-caret-position="371">
+          <caret line="65" column="65" selection-start-line="65" selection-start-column="65" selection-end-line="65" selection-end-column="65" />
         </state>
       </provider>
     </entry>

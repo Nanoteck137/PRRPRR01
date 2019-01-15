@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class SwitchCase {
 
+    /**
+     * Print the menu
+     */
     private static void printMenu() {
         System.out.println("1 - Low Level Programming languages");
         System.out.println("2 - High Level Programming languages");
@@ -13,6 +16,11 @@ public class SwitchCase {
         System.out.println();
     }
 
+    /**
+     * Process the input we got from the user
+     * @param option The option user choose
+     * @return Returns if the program should exit
+     */
     private static boolean processInput(int option) {
         switch(option) {
             case 1:
@@ -53,6 +61,10 @@ public class SwitchCase {
 
     }
 
+    /**
+     * The main method of the program
+     * @param args The command line arguments sent to the program
+     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
