@@ -6,7 +6,8 @@ public class CocktailSort {
      * Sorts the list with the Cocktail Sort algorithm
      * @param list The list to be sorted NOTE: passed as a reference
      */
-    public static void cocktailSort(int[] list) {
+    public static int cocktailSort(int[] list) {
+        int result = 0;
         boolean swapped = true;
 
         while (swapped) {
@@ -18,6 +19,8 @@ public class CocktailSort {
                     list[i] = list[i + 1];
                     list[i + 1] = temp;
                     swapped = true;
+
+                    result++;
                 }
             }
 
@@ -32,9 +35,13 @@ public class CocktailSort {
                     list[i] = list[i + 1];
                     list[i + 1] = temp;
                     swapped = true;
+
+                    result++;
                 }
             }
         }
+
+        return result;
     }
 
 

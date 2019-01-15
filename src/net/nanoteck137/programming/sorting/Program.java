@@ -17,27 +17,27 @@ public class Program {
 
         int[] list = array.clone();
         long startTime = System.nanoTime();
-        BubbleSort.bubbleSort(list);
+        int numSwiches= BubbleSort.bubbleSort(list);
         long endTime = System.nanoTime();
-        System.out.printf("Bubble Sort - Time Taken: %fms\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, Arrays.toString(list));
+        System.out.printf("Bubble Sort - Time Taken: %fms Num switches: %d\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, numSwiches, Arrays.toString(list));
 
         list = array.clone();
         startTime = System.nanoTime();
-        CocktailSort.cocktailSort(list);
+        numSwiches = CocktailSort.cocktailSort(list);
         endTime = System.nanoTime();
-        System.out.printf("Cocktail Sort - Time Taken: %fms\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, Arrays.toString(list));
+        System.out.printf("Cocktail Sort - Time Taken: %fms Num switches: %d\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, numSwiches, Arrays.toString(list));
 
         list = array.clone();
         startTime = System.nanoTime();
-        SelectionSort.selectionSort(list);
+        numSwiches = SelectionSort.selectionSort(list);
         endTime = System.nanoTime();
-        System.out.printf("Selection Sort - Time Taken: %fms\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, Arrays.toString(list));
+        System.out.printf("Selection Sort - Time Taken: %fms Num switches: %d\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, numSwiches, Arrays.toString(list));
 
         list = array.clone();
         startTime = System.nanoTime();
-        InsertionSort.insertionSort(list);
+        numSwiches = InsertionSort.insertionSort(list);
         endTime = System.nanoTime();
-        System.out.printf("Insertion Sort - Time Taken: %fms\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, Arrays.toString(list));
+        System.out.printf("Insertion Sort - Time Taken: %fms Num switches: %d\n\tResult: %s\n\n", (endTime - startTime) / 1000000.0f, numSwiches, Arrays.toString(list));
     }
 
 }
