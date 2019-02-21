@@ -1,7 +1,6 @@
 package net.nanoteck137.programming;
 
 import java.io.*;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Guess {
@@ -111,7 +110,15 @@ public class Guess {
         while(running)
         {
             System.out.printf("Make a guess: ");
-            int guess = scanner.nextInt();
+
+            int guess = 0;
+            try {
+                guess = scanner.nextInt();
+            } catch(Exception exception) {
+                System.out.println("Type a whole number");
+                scanner.next();
+                continue;
+            }
             System.out.println();
 
             totalGuesses++;
