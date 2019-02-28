@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class Guess {
 
+    //NOTE(patrik):
+    public static final String SAVE_STATE_FILE = "SaveState.txt";
+
     public static final int DIFFICULTY_EASY = 1;
     public static final int DIFFICULTY_NORMAL = 2;
     public static final int DIFFICULTY_HARD = 3;
@@ -15,6 +18,11 @@ public class Guess {
     public static int totalGuesses = 0;
     public static int currentGameGuesses = 0;
 
+    /**
+     * Returns the highest possible random value based on the difficulty
+     * @param difficulty The difficulty chosen
+     * @return
+     */
     private static int getDifficultyHigh(int difficulty) {
         int result = 100;
 
@@ -39,6 +47,11 @@ public class Guess {
         return result;
     }
 
+    /**
+     * Helper method to get a random value based on the difficulty
+     * @param difficulty
+     * @return
+     */
     private static int getRandomValue(int difficulty) {
         int high = getDifficultyHigh(difficulty);
         int result = (int) (Math.random() * high);
@@ -46,6 +59,12 @@ public class Guess {
         return result;
     }
 
+    /**
+     * Returns the correct guess number the computer generated and gives the user a choice of the difficulty
+     * @param scanner The scanner in use
+     * @param newDifficulty If there should be a new difficulty
+     * @return
+     */
     private static int getCorrectGuess(Scanner scanner, boolean newDifficulty) {
         if(newDifficulty) {
             System.out.println("Difficulty: ");
@@ -62,9 +81,12 @@ public class Guess {
         return correctGuess;
     }
 
+    /**
+     * Saves the progress to a file
+     */
     private static void saveProgress() {
         try {
-            FileWriter fileWriter = new FileWriter("SaveState.txt");
+            FileWriter fileWriter = new FileWriter(SAVE_STATE_FILE);
             fileWriter.write(String.format("%d,%d", gameWon, totalGuesses));
             fileWriter.close();
         } catch (IOException e) {
@@ -72,9 +94,12 @@ public class Guess {
         }
     }
 
+    /**
+     * Restores the progress from a file
+     */
     private static void restoreProgress() {
         try {
-            FileReader fileReader = new FileReader("SaveState.txt");
+            FileReader fileReader = new FileReader(SAVE_STATE_FILE);
             BufferedReader reader = new BufferedReader(fileReader);
 
             String line = reader.readLine();
@@ -99,22 +124,27 @@ public class Guess {
         }
     }
 
+    /**
+     * Main method for the program
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        //NOTE(patrik): Restore the progress in the beginning of the program
         restoreProgress();
 
         int correctGuess = getCorrectGuess(scanner, true);
 
         boolean running = true;
-        while(running)
-        {
-            System.out.printf("Make a guess: ");
+        while(running) {
+            System.out.print("Make a guess: ");
 
             int guess = 0;
             try {
                 guess = scanner.nextInt();
             } catch(Exception exception) {
+                //NOTE(patrik): If the user types in something that's not a number the code below will execute
                 System.out.println("Type a whole number");
                 scanner.next();
                 continue;
@@ -124,10 +154,11 @@ public class Guess {
             totalGuesses++;
             currentGameGuesses++;
 
+            //NOTE(patrik):
             if(guess > correctGuess) {
-                System.out.println("High");
+                System.out.println("Too high");
             } else if(guess < correctGuess) {
-                System.out.println("Low");
+                System.out.println("Too low");
             } else {
                 System.out.println("-----------");
                 System.out.println("Correct");
@@ -149,14 +180,17 @@ public class Guess {
                 int choice = scanner.nextInt();
                 switch(choice) {
                     case 1: {
+                        //NOTE(patrik): If the player wants to play again with the same difficulty
                         correctGuess = getCorrectGuess(scanner, false);
                     } break;
 
                     case 2: {
+                        //NOTE(patrik): If the player wants to play again with the a different difficulty
                         correctGuess = getCorrectGuess(scanner, true);
                     } break;
 
                     default: {
+                        //NOTE(patrik): Quit the program and save the progress
                         saveProgress();
                         running = false;
                     } break;
@@ -165,6 +199,7 @@ public class Guess {
             }
         }
 
+        //NOTE(patrik): The scanner needs to be closed
         scanner.close();
     }
 
