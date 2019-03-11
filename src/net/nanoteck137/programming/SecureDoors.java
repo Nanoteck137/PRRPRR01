@@ -12,13 +12,12 @@ public class SecureDoors {
 
         ArrayList<String> list = new ArrayList<>();
 
-        while (n-- > 0) 
+        while (n-- > 0)
         {
-            String line = scanner.nextLine();
-            String[] wow = line.split(" ");
+            String[] line = scanner.nextLine().split(" ");
 
-            String command = wow[0];
-            String name = wow[1];
+            String command = line[0];
+            String name = line[1];
 
             if(command.equals("entry"))
             {
