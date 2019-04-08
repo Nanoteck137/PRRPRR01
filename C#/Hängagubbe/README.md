@@ -6,7 +6,11 @@ C# for life
 
 ## Program Flow
 
+![Program Flow Diagram](Diagram.png) 
+
+
 - Program Start
+    - Ta in user input
     - 
 
 ## Klasser
