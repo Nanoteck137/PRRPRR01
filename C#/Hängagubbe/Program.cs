@@ -1,111 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/** 
+ * TODO List
+ *  - Print meny
+ *      - Let the user add words
+ *  - Game restart
+ *  - Game
+ */
+
 class Program
 {
-
-    static string[] art = {
-@"       
-       
-       
-       
-       
-       
-=========",
-
-@"      +
-      |
-      |
-      |
-      |
-      |
-=========",
-
-@"  +---+
-      |
-      |
-      |
-      |
-      |
-=========",
-
-@"  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========",
-
-@"  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========",
-
-@"  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========",
-
-@"  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========",
-
-@"  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========",
-
-@"  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========",
-
-@"  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-========="
-
-};
-
     /// <summary>
-    /// 
+    /// Main method of the programs
     /// </summary>
-    /// <param name="args"></param>
+    /// <param name="args">Command Line arguments</param>
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World");
-        Console.Clear();
+        //TODO(patrik): Load words from a file
+        List<string> words = new List<string>() { };
 
-        //Console.BackgroundColor = ConsoleColor.Blue;
-        Console.WriteLine("Woooh");
-        foreach(string f in art)
-        {
-            Console.WriteLine(f);
-            Console.WriteLine();
-        }
-
-        Console.ResetColor();
-
-        Console.Read();
+        Game game = new Game(words);
+        game.Run();
     }
 }
