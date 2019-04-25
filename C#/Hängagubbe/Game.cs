@@ -28,7 +28,10 @@ class Game
     public void Run()
     {
         //TODO(patrik): Pick a random word
-        string answer = "Hello".ToLower();
+        Random random = new Random();
+        int index = random.Next(0, m_WordList.Count);
+        string answer = m_WordList[index].ToLower();
+        Util.DebugPrint(answer);
 
         char[] wordChar = new char[answer.Length];
         for (int i = 0; i < answer.Length; i++)

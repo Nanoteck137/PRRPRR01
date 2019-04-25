@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 /** 
  * TODO List
@@ -19,6 +20,16 @@ class Program
     {
         //TODO(patrik): Load words from a file
         List<string> words = new List<string>() { };
+
+        if(words.Count <= 0)
+        {
+            Console.WriteLine("No words in the list");
+            Console.WriteLine("Exiting...");
+
+            Thread.Sleep(3000);
+
+            Environment.Exit(-1);
+        }
 
         Game game = new Game(words);
         game.Run();
