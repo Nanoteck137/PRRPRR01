@@ -22,5 +22,12 @@ class Program
 
         Game game = new Game(words);
         game.Run();
+
+        if(game.Won)
+        {
+            Console.WriteLine("You won wooow");
+        }
+
+        Console.Read();
     }
 }

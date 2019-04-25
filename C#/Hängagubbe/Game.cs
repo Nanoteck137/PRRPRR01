@@ -5,21 +5,30 @@ class Game
 {
     private List<string> m_WordList;
 
-    private List<char> m_RightChars;
-    private List<char> m_WrongChars;
+    private List<char> m_RightGuesses;
+    private List<string> m_WrongGuesses;
+
+    private bool m_Won;
+
+    public bool Won
+    {
+        get { return m_Won; }
+    }
 
     public Game(List<string> wordList)
     {
         m_WordList = wordList;
 
-        m_RightChars = new List<char>();
-        m_WrongChars = new List<char>();
+        m_RightGuesses = new List<char>();
+        m_WrongGuesses = new List<string>();
+
+        m_Won = false;
     }
 
     public void Run()
     {
         //TODO(patrik): Pick a random word
-        string answer = "Hello";
+        string answer = "Hello".ToLower();
 
         char[] wordChar = new char[answer.Length];
         for (int i = 0; i < answer.Length; i++)
@@ -33,12 +42,12 @@ class Game
 
             //TODO(patrik): Draw the progress
 
-            if (m_WrongChars.Count > 0)
+            if (m_WrongGuesses.Count > 0)
             {
-                Console.WriteLine("Wrong characters");
-                foreach (char c in m_WrongChars)
+                Console.WriteLine("Wrong Guesses");
+                foreach (string str in m_WrongGuesses)
                 {
-                    Console.Write(c + " ");
+                    Console.Write(str + " ");
                 }
                 Console.WriteLine();
             }
@@ -52,12 +61,13 @@ class Game
 
             string word = Console.ReadLine().ToLower();
 
-            if (word.ToLower() == answer.ToLower())
+            if (word == answer)
             {
                 //NOTE(patrik): The user wrote the right word
                 Console.WriteLine("Right word");
+                m_Won = true;
             }
-            else if (answer.ToLower().Contains(word[0].ToString()))
+            else if (answer.Contains(word[0].ToString()))
             {
                 Console.WriteLine("Right char");
                 for (int i = 0; i < answer.Length; i++)
@@ -65,15 +75,20 @@ class Game
                     if (answer[i] == word[0])
                     {
                         wordChar[i] = answer[i];
-                        if (m_RightChars.Contains(answer[i]))
-                            m_RightChars.Add(answer[i]);
+                        if (m_RightGuesses.Contains(answer[i]))
+                            m_RightGuesses.Add(answer[i]);
                     }
                 }
             }
             else
             {
-                if (!m_WrongChars.Contains(word[0]))
-                    m_WrongChars.Add(word[0]);
+                if (!m_WrongGuesses.Contains(word))
+                    m_WrongGuesses.Add(word);
+            }
+
+            if(m_Won)
+            {
+                return;
             }
         }
     }
