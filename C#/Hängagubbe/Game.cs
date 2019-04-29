@@ -31,7 +31,6 @@ class Game
         Random random = new Random();
         int index = random.Next(0, m_WordList.Count);
         string answer = m_WordList[index].ToLower();
-        Util.DebugPrint(answer);
 
         char[] wordChar = new char[answer.Length];
         for (int i = 0; i < answer.Length; i++)
@@ -42,6 +41,8 @@ class Game
         while (true)
         {
             Console.Clear();
+
+            Util.DebugPrintLine(answer);
 
             //TODO(patrik): Draw the progress
 
@@ -62,17 +63,25 @@ class Game
 
             Console.WriteLine();
 
+            if (m_Won)
+            {
+                return;
+            }
+
             string word = Console.ReadLine().ToLower();
+
+            if(word.Length <= 0)
+            {
+                continue;
+            }
 
             if (word == answer)
             {
                 //NOTE(patrik): The user wrote the right word
-                Console.WriteLine("Right word");
                 m_Won = true;
             }
             else if (answer.Contains(word[0].ToString()))
             {
-                Console.WriteLine("Right char");
                 for (int i = 0; i < answer.Length; i++)
                 {
                     if (answer[i] == word[0])
@@ -89,9 +98,10 @@ class Game
                     m_WrongGuesses.Add(word);
             }
 
-            if(m_Won)
+            if(answer == new string(wordChar))
             {
-                return;
+                m_Won = true;
+                continue;
             }
         }
     }
