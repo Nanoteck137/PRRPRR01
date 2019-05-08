@@ -1,8 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// A single game, handles all the logic for that game
+/// </summary>
 class Game
 {
+    #region Variables
+
+    /// <summary>
+    /// Global string array for the stages of the hangman
+    /// </summary>
     private static string[] s_Art = {
 @"       
        
@@ -93,18 +101,39 @@ class Game
 ========="
     };
 
+    /// <summary>
+    /// Current word used in this game
+    /// </summary>
     private string m_Word;
 
+    /// <summary>
+    /// The right characters the user has guessed
+    /// </summary>
     private List<char> m_RightGuesses;
+
+    /// <summary>
+    /// The wrong characters or words the user has guessed
+    /// </summary>
     private List<string> m_WrongGuesses;
 
+    /// <summary>
+    /// A boolean too see if the user has won the current game used outside in the program
+    /// </summary>
     private bool m_Won;
 
+    /// <summary>
+    /// Property to get the m_Won variable
+    /// </summary>
     public bool Won
     {
         get { return m_Won; }
     }
+     #endregion
 
+    /// <summary>
+    /// Constructor for the game initalize some variables
+    /// </summary>
+    /// <param name="word">The word for the game</param>
     public Game(string word)
     {
         m_Word = word;
@@ -115,6 +144,9 @@ class Game
         m_Won = false;
     }
 
+    /// <summary>
+    /// Starts the game and loops here until the game is over and then returns back to the program
+    /// </summary>
     public void Run()
     {
         char[] wordChar = new char[m_Word.Length];

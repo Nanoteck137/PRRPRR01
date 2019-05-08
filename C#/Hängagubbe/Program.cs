@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Threading;
 
+/// <summary>
+/// Single Menu item for the main menu
+/// </summary>
 class MenuItem
 {
     public string name;
@@ -14,15 +17,32 @@ class MenuItem
     }
 }
 
+/// <summary>
+/// Main Program, handles the menu and start of a game
+/// </summary>
 class Program
 {
+    /// <summary>
+    /// Menu items used by the drawing of the menu, also a dynamic way to add items
+    /// </summary>
     private List<MenuItem> m_MenuItems;
-    private List<String> m_WordList;
 
+    /// <summary>
+    /// Some words that can be choosen from when starting a new game
+    /// </summary>
+    private List<string> m_WordList;
+
+    /// <summary>
+    /// Used for getting out of the menu when the user wants to play
+    /// </summary>
     private bool m_StartGame;
 
+    /// <summary>
+    /// Constructor for the program initalizes the menu and word list
+    /// </summary>
     public Program()
     {
+        //NOTE(patrik): Initalizing the menu items
         m_MenuItems = new List<MenuItem>();
         m_MenuItems.Add(new MenuItem("Add Word", AddWord));
         m_MenuItems.Add(new MenuItem("Remove Word", RemoveWord));
@@ -34,6 +54,10 @@ class Program
     }
 
     #region Menu Items
+
+    /// <summary>
+    /// Menu Item: Lets the user to add words
+    /// </summary>
     public void AddWord()
     {
         while (true)
@@ -71,6 +95,9 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Menu Item: Lets the user remove words
+    /// </summary>
     public void RemoveWord()
     {
         Console.Clear();
@@ -117,16 +144,25 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Menu Item: Clears the whole word list
+    /// </summary>
     public void ClearWordList()
     {
         m_WordList.Clear();
     }
 
+    /// <summary>
+    /// Menu Item: Starts a game
+    /// </summary>
     public void Play()
     {
         m_StartGame = true;
     }
 
+    /// <summary>
+    /// Menu Item: Quits the program
+    /// </summary>
     public void Quit()
     {
         //TODO(patrik): Save the newWords list??
@@ -135,6 +171,9 @@ class Program
     #endregion
 
     #region Menu
+    /// <summary>
+    /// Print the menu
+    /// </summary>
     public void PrintMenu()
     {
         Console.Write("Current word list: ");
@@ -150,6 +189,9 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Starts the menu and stays here until the player starts a game
+    /// </summary>
     public void MainMenu()
     {
         while (true)
@@ -177,43 +219,58 @@ class Program
     }
     #endregion
 
+    /// <summary>
+    /// Start a single game
+    /// </summary>
     public void StartGame()
     {
         //TODO(patrik): Load words from a file
 
+        //NOTE(patrik): If their is not any word in the words list then the user can pick a word
         string word = "";
 
         if (m_WordList.Count <= 0)
         {
+            //NOTE(patrik): Let the user pick a word
             Console.Write("Write a word: ");
             word = Console.ReadLine().Trim().ToLower();
         }
         else
         {
+            //NOTE(patrik): If their is words in the list then choose a random word in their
             Random random = new Random();
             int index = random.Next(0, m_WordList.Count);
             word = m_WordList[index].ToLower();
         }
 
+        //NOTE(patrik): Initalizes the game and starts it
         Game game = new Game(word);
         game.Run();
 
         Console.Clear();
 
+        //NOTE(patrik): Checks if the user has won then print something
         if (game.Won)
         {
+            //NOTE(patrik): The user won
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("You won the round");
             Console.ResetColor();
         }
         else
         {
+            //NOTE(patrik): The user lost
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You lost the round");
             Console.ResetColor();
         }
     }
 
+    /// <summary>
+    /// Prints the message and waits for the user to type something
+    /// </summary>
+    /// <param name="message">The message to be printed</param>
+    /// <returns>Returns true if the user types yes or y and false for everything else</returns>
     private bool YesNoQuestion(string message)
     {
         Console.WriteLine("{0} (yes/no)", message);
@@ -229,6 +286,9 @@ class Program
         }
     }
 
+    /// <summary>
+    /// Starts the game and loops here forever
+    /// </summary>
     public void Start()
     {
         while (true)
@@ -236,6 +296,8 @@ class Program
             MainMenu();
 
             StartGame();
+
+            m_StartGame = false;
         }
     }
     /// <summary>
