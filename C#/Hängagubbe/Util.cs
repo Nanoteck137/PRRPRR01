@@ -8,14 +8,14 @@ class Util
 {
     private static bool m_DebugOn = false;
 
-    public static void Initalize(bool debug)
-    {
-        m_DebugOn = debug;
+    public static bool Debug { 
+        set { m_DebugOn = value; }
+        get { return m_DebugOn; }
     }
 
     public static void DebugPrintLine(string format, params Object[] objects)
     {
-        if (m_DebugOn)
+        if (Debug)
         {
             Console.Write("DEBUG: ");
             Console.WriteLine(format, objects);

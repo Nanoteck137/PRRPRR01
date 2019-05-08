@@ -2,15 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-/** 
- * TODO List
- *  - Print meny
- *      - Let the user add words
- *  - Game restart
- *  - Game
- */
-
-struct MenuItem
+class MenuItem
 {
     public string name;
     public Action func;
@@ -31,8 +23,6 @@ class Program
 
     public Program()
     {
-        Util.Initalize(true);
-
         m_MenuItems = new List<MenuItem>();
         m_MenuItems.Add(new MenuItem("Add Word", AddWord));
         m_MenuItems.Add(new MenuItem("Remove Word", RemoveWord));
@@ -43,6 +33,7 @@ class Program
         m_WordList = new List<string>();
     }
 
+    #region Menu Items
     public void AddWord()
     {
         while (true)
@@ -141,7 +132,9 @@ class Program
         //TODO(patrik): Save the newWords list??
         Environment.Exit(0);
     }
+    #endregion
 
+    #region Menu
     public void PrintMenu()
     {
         Console.Write("Current word list: ");
@@ -182,6 +175,7 @@ class Program
             Console.Clear();
         }
     }
+    #endregion
 
     public void StartGame()
     {
@@ -250,6 +244,14 @@ class Program
     /// <param name="args">Command Line arguments</param>
     static void Main(string[] args)
     {
+        foreach(string arg in args)
+        {
+            if(arg == "--debug")
+            {
+                Util.Debug = true;
+            }
+        }
+
         Program program = new Program();
         program.Start();
     }
