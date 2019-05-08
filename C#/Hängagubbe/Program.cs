@@ -67,21 +67,15 @@ class Program
             Util.PrintList(m_WordList);
             Console.WriteLine();
 
-        ForbiddenMagic:
-            Console.WriteLine("Add more words... (y/n)");
-            string answer = Console.ReadLine();
+            bool result = YesNoQuestion("Add more words...");
 
-            if (answer == "yes" || answer == "y")
+            if(result)
             {
                 continue;
             }
-            else if (answer == "no" || answer == "n")
-            {
-                break;
-            }
             else
             {
-                goto ForbiddenMagic;
+                break;
             }
         }
     }
@@ -165,10 +159,8 @@ class Program
         }
     }
 
-    public void Start()
+    public void StartGame()
     {
-        MainMenu();
-
         //TODO(patrik): Load words from a file
 
         string word = "";
@@ -188,16 +180,58 @@ class Program
         Game game = new Game(word);
         game.Run();
 
+        Console.Clear();
+
         if (game.Won)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("You won wooow");
+            Console.ResetColor();
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("You lost");
+            Console.ResetColor();
         }
+    }
 
-        Console.Read();
+    private bool YesNoQuestion(string message)
+    {
+        Console.WriteLine("{0} (yes/no)", message);
+        string answer = Console.ReadLine().Trim().ToLower();
+
+        if(answer == "yes" || answer == "y")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Start()
+    {
+        MainMenu();
+
+    PlayAgain:
+        StartGame();
+
+        bool result = YesNoQuestion("Do you want to play again?");
+
+        if(result == true)
+        {
+            goto PlayAgain;
+        }
+        else
+        {
+            Console.Clear();
+
+            Console.WriteLine("Closing the program in 2 seconds");
+            Thread.Sleep(2000);
+            Environment.Exit(0);
+        }
     }
     /// <summary>
     /// Main method of the programs
