@@ -3,7 +3,89 @@ using System.Collections.Generic;
 
 class Game
 {
-    private List<string> m_WordList;
+    private static string[] s_Art = {
+@"       
+       
+       
+       
+       
+       
+=========",
+
+@"      +
+      |
+      |
+      |
+      |
+      |
+=========",
+
+@"  +---+
+      |
+      |
+      |
+      |
+      |
+=========",
+
+@"  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========",
+
+@"  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========",
+
+@"  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========",
+
+@"  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========",
+
+@"  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========",
+
+@"  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========",
+
+@"  +---+  
+  |   |  
+  O   |  
+ /|\  |  
+ / \  |  
+      |  
+========="
+    };
+
+    private string m_Word;
 
     private List<char> m_RightGuesses;
     private List<string> m_WrongGuesses;
@@ -15,9 +97,9 @@ class Game
         get { return m_Won; }
     }
 
-    public Game(List<string> wordList)
+    public Game(string word)
     {
-        m_WordList = wordList;
+        m_Word = word;
 
         m_RightGuesses = new List<char>();
         m_WrongGuesses = new List<string>();
@@ -27,24 +109,36 @@ class Game
 
     public void Run()
     {
-        //TODO(patrik): Pick a random word
-        Random random = new Random();
-        int index = random.Next(0, m_WordList.Count);
-        string answer = m_WordList[index].ToLower();
-
-        char[] wordChar = new char[answer.Length];
-        for (int i = 0; i < answer.Length; i++)
+        char[] wordChar = new char[m_Word.Length];
+        for (int i = 0; i < m_Word.Length; i++)
         {
-            wordChar[i] = '_';
+            if (m_Word[i] == ' ')
+            {
+                wordChar[i] = ' ';
+            }
+            else
+            {
+                wordChar[i] = '_';
+            }
         }
 
         while (true)
         {
             Console.Clear();
 
-            Util.DebugPrintLine(answer);
+            Util.DebugPrintLine(m_Word);
 
             //TODO(patrik): Draw the progress
+
+            if(m_WrongGuesses.Count >= s_Art.Length)
+            {
+                break;
+            }
+
+            if(m_WrongGuesses.Count > 0)
+            {
+                Console.WriteLine(s_Art[m_WrongGuesses.Count - 1]);
+            }
 
             if (m_WrongGuesses.Count > 0)
             {
@@ -75,20 +169,20 @@ class Game
                 continue;
             }
 
-            if (word == answer)
+            if (word == m_Word)
             {
                 //NOTE(patrik): The user wrote the right word
                 m_Won = true;
             }
-            else if (answer.Contains(word[0].ToString()))
+            else if (m_Word.Contains(word[0].ToString()))
             {
-                for (int i = 0; i < answer.Length; i++)
+                for (int i = 0; i < m_Word.Length; i++)
                 {
-                    if (answer[i] == word[0])
+                    if (m_Word[i] == word[0])
                     {
-                        wordChar[i] = answer[i];
-                        if (m_RightGuesses.Contains(answer[i]))
-                            m_RightGuesses.Add(answer[i]);
+                        wordChar[i] = m_Word[i];
+                        if (m_RightGuesses.Contains(m_Word[i]))
+                            m_RightGuesses.Add(m_Word[i]);
                     }
                 }
             }
@@ -98,11 +192,19 @@ class Game
                     m_WrongGuesses.Add(word);
             }
 
-            if(answer == new string(wordChar))
+            if(m_Word == new string(wordChar))
             {
                 m_Won = true;
                 continue;
             }
+        }
+
+        if(!m_Won)
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine(s_Art[m_WrongGuesses.Count - 1]);
+            Console.ResetColor();
         }
     }
 }

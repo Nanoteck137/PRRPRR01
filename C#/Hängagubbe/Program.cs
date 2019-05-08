@@ -24,22 +24,23 @@ struct MenuItem
 
 class Program
 {
-    private List<MenuItem> menuItems;
+    private List<MenuItem> m_MenuItems;
+    private List<String> m_WordList;
 
-    private List<String> newWords;
+    private bool m_StartGame;
 
     public Program()
     {
         Util.Initalize(true);
 
-        menuItems = new List<MenuItem>();
-        menuItems.Add(new MenuItem("Add Word", AddWord));
-        menuItems.Add(new MenuItem("Remove Word", RemoveWord));
-        menuItems.Add(new MenuItem("Clear word list", RemoveWord));
-        menuItems.Add(new MenuItem("Play", Play));
-        menuItems.Add(new MenuItem("Quit", Quit));
+        m_MenuItems = new List<MenuItem>();
+        m_MenuItems.Add(new MenuItem("Add Word", AddWord));
+        m_MenuItems.Add(new MenuItem("Remove Word", RemoveWord));
+        m_MenuItems.Add(new MenuItem("Clear word list", ClearWordList));
+        m_MenuItems.Add(new MenuItem("Play", Play));
+        m_MenuItems.Add(new MenuItem("Quit", Quit));
 
-        newWords = new List<string>();
+        m_WordList = new List<string>();
     }
 
     public void AddWord()
@@ -49,24 +50,24 @@ class Program
             Console.Clear();
 
             Console.Write("Current word list: ");
-            Util.PrintList(newWords);
+            Util.PrintList(m_WordList);
             Console.WriteLine();
 
             Console.Write("Write a new word: ");
             string word = Console.ReadLine().ToLower();
 
-            if (!newWords.Contains(word))
+            if (!m_WordList.Contains(word))
             {
-                newWords.Add(word);
+                m_WordList.Add(word);
             }
 
             Console.Clear();
 
             Console.Write("Current word list: ");
-            Util.PrintList(newWords);
+            Util.PrintList(m_WordList);
             Console.WriteLine();
 
-            ForbiddenMagic:
+        ForbiddenMagic:
             Console.WriteLine("Add more words... (y/n)");
             string answer = Console.ReadLine();
 
@@ -85,9 +86,47 @@ class Program
         }
     }
 
-    public void RemoveWord() { }
-    public void ClearWordList() { }
-    public void Play() { }
+    public void RemoveWord()
+    {
+        Console.Clear();
+
+        if(m_WordList.Count <= 0)
+        {
+            Console.WriteLine("No words in the list");
+            Thread.Sleep(800);
+            return;
+        }
+
+        bool running = true;
+        while (running)
+        {
+            Console.Clear();
+            for (int i = 0; i < m_WordList.Count; i++)
+            {
+                Console.WriteLine("{0} - {1}", i + 1, m_WordList[i]);
+            }
+
+            Console.WriteLine("To quit this screen write (quit/q)");
+
+            string line = Console.ReadLine().Trim().ToLower();
+            if(line == "quit" || line == "q")
+            {
+                running = false;
+                continue;
+            }
+        }
+    }
+
+    public void ClearWordList()
+    {
+        m_WordList.Clear();
+    }
+
+    public void Play()
+    {
+        m_StartGame = true;
+    }
+
     public void Quit()
     {
         //TODO(patrik): Save the newWords list??
@@ -97,15 +136,15 @@ class Program
     public void PrintMenu()
     {
         Console.Write("Current word list: ");
-        Util.PrintList(newWords);
+        Util.PrintList(m_WordList);
         Console.WriteLine();
         Console.WriteLine();
 
         Console.WriteLine("---------- Main Menu ----------");
 
-        for (int i = 0; i < menuItems.Count; i++)
+        for (int i = 0; i < m_MenuItems.Count; i++)
         {
-            Console.WriteLine("{0} - {1}", i + 1, menuItems[i].name);
+            Console.WriteLine("{0} - {1}", i + 1, m_MenuItems[i].name);
         }
     }
 
@@ -119,7 +158,10 @@ class Program
             int index = int.Parse(Console.ReadLine()) - 1;
             Util.DebugPrintLine("Index: {0}", index);
 
-            menuItems[index].func();
+            m_MenuItems[index].func();
+
+            if (m_StartGame)
+                break;
         }
     }
 
@@ -128,24 +170,31 @@ class Program
         MainMenu();
 
         //TODO(patrik): Load words from a file
-        List<string> words = new List<string>() { "Hello", "Wooh", "Test" };
 
-        if (words.Count <= 0)
+        string word = "";
+
+        if (m_WordList.Count <= 0)
         {
-            Console.WriteLine("No words in the list");
-            Console.WriteLine("Exiting...");
-
-            Thread.Sleep(3000);
-
-            Environment.Exit(-1);
+            Console.Write("Write a word: ");
+            word = Console.ReadLine().Trim().ToLower();
+        }
+        else
+        {
+            Random random = new Random();
+            int index = random.Next(0, m_WordList.Count);
+            string answer = m_WordList[index].ToLower();
         }
 
-        Game game = new Game(words);
+        Game game = new Game(word);
         game.Run();
 
         if (game.Won)
         {
             Console.WriteLine("You won wooow");
+        }
+        else
+        {
+            Console.WriteLine("You lost");
         }
 
         Console.Read();
