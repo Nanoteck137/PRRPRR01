@@ -10,6 +10,14 @@ class Game
        
        
        
+         ",
+
+@"       
+       
+       
+       
+       
+       
 =========",
 
 @"      +
@@ -107,16 +115,6 @@ class Game
         m_Won = false;
     }
 
-    public void DrawHangman()
-    {
-
-
-        if (m_WrongGuesses.Count > 0)
-        {
-            Console.WriteLine(s_Art[m_WrongGuesses.Count - 1]);
-        }
-    }
-
     public void Run()
     {
         char[] wordChar = new char[m_Word.Length];
@@ -138,14 +136,12 @@ class Game
 
             Util.DebugPrintLine(m_Word);
 
-            //TODO(patrik): Draw the progress
-
-            if (m_WrongGuesses.Count >= s_Art.Length)
+            if (m_WrongGuesses.Count >= s_Art.Length - 1)
             {
                 break;
             }
 
-            DrawHangman();
+            Console.WriteLine(s_Art[m_WrongGuesses.Count]);
 
             if (m_WrongGuesses.Count > 0)
             {

@@ -87,25 +87,40 @@ class Program
         if(m_WordList.Count <= 0)
         {
             Console.WriteLine("No words in the list");
-            Thread.Sleep(800);
+            Thread.Sleep(1000);
             return;
         }
 
-        bool running = true;
-        while (running)
+        while (true)
         {
             Console.Clear();
+
+            if(m_WordList.Count <= 0)
+            {
+                return;
+            }
+
             for (int i = 0; i < m_WordList.Count; i++)
             {
                 Console.WriteLine("{0} - {1}", i + 1, m_WordList[i]);
             }
 
+            Console.WriteLine("Choose a word to remove (1-{0})", m_WordList.Count);
             Console.WriteLine("To quit this screen write (quit/q)");
 
             string line = Console.ReadLine().Trim().ToLower();
             if(line == "quit" || line == "q")
             {
-                running = false;
+                break;
+            }
+
+            try
+            {
+                int index = int.Parse(line);
+                m_WordList.RemoveAt(index - 1);
+            }
+            catch
+            {
                 continue;
             }
         }
@@ -146,16 +161,25 @@ class Program
     {
         while (true)
         {
-            Console.Clear();
             PrintMenu();
 
-            int index = int.Parse(Console.ReadLine()) - 1;
-            Util.DebugPrintLine("Index: {0}", index);
+            int index = 0;
+
+            try
+            {
+                 index = int.Parse(Console.ReadLine()) - 1;
+            }
+            catch
+            {
+                continue;
+            }
 
             m_MenuItems[index].func();
 
             if (m_StartGame)
                 break;
+
+            Console.Clear();
         }
     }
 
@@ -174,7 +198,7 @@ class Program
         {
             Random random = new Random();
             int index = random.Next(0, m_WordList.Count);
-            string answer = m_WordList[index].ToLower();
+            word = m_WordList[index].ToLower();
         }
 
         Game game = new Game(word);
@@ -185,13 +209,13 @@ class Program
         if (game.Won)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("You won wooow");
+            Console.WriteLine("You won the round");
             Console.ResetColor();
         }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("You lost");
+            Console.WriteLine("You lost the round");
             Console.ResetColor();
         }
     }
@@ -213,24 +237,11 @@ class Program
 
     public void Start()
     {
-        MainMenu();
-
-    PlayAgain:
-        StartGame();
-
-        bool result = YesNoQuestion("Do you want to play again?");
-
-        if(result == true)
+        while (true)
         {
-            goto PlayAgain;
-        }
-        else
-        {
-            Console.Clear();
+            MainMenu();
 
-            Console.WriteLine("Closing the program in 2 seconds");
-            Thread.Sleep(2000);
-            Environment.Exit(0);
+            StartGame();
         }
     }
     /// <summary>
