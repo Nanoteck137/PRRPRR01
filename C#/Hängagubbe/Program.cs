@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.IO;
+using Newtonsoft.Json;
 
 /// <summary>
 /// Single Menu item for the main menu
@@ -18,10 +20,23 @@ class MenuItem
 }
 
 /// <summary>
+/// Used when saving and loading words from a file
+/// </summary>
+class JsonWords
+{
+    public List<string> words;
+}
+
+/// <summary>
 /// Main Program, handles the menu and start of a game
 /// </summary>
 class Program
 {
+    /// <summary>
+    /// Constant for the file name used for saving/loading words
+    /// </summary>
+    private const string WORD_FILE_NAME = "words.json";
+
     /// <summary>
     /// Menu items used by the drawing of the menu, also a dynamic way to add items
     /// </summary>
@@ -53,6 +68,34 @@ class Program
         m_WordList = new List<string>();
     }
 
+    #region File Saving/Loading
+    /// <summary>
+    /// Loads the words from a file and sets m_WordList to the loaded list
+    /// </summary>
+    public void LoadWordsFromFile()
+    {
+        if (File.Exists(WORD_FILE_NAME))
+        {
+            string fileContent = File.ReadAllText(WORD_FILE_NAME);
+            JsonWords fileWords = JsonConvert.DeserializeObject<JsonWords>(fileContent);
+            m_WordList = fileWords.words;
+        }
+    }
+
+    /// <summary>
+    /// Saves word list to a file
+    /// </summary>
+    public void SaveWordToFile()
+    {
+        JsonWords fileWords = new JsonWords();
+        fileWords.words = m_WordList;
+
+        string fileContent = JsonConvert.SerializeObject(fileWords, Formatting.Indented);
+
+        File.WriteAllText(WORD_FILE_NAME, fileContent);
+    }
+    #endregion
+
     #region Menu Items
 
     /// <summary>
@@ -74,6 +117,8 @@ class Program
             if (!m_WordList.Contains(word))
             {
                 m_WordList.Add(word);
+
+                SaveWordToFile();
             }
 
             Console.Clear();
@@ -82,7 +127,7 @@ class Program
             Util.PrintList(m_WordList);
             Console.WriteLine();
 
-            bool result = YesNoQuestion("Add more words...");
+            bool result = Util.YesNoQuestion("Add more words...");
 
             if(result)
             {
@@ -165,7 +210,8 @@ class Program
     /// </summary>
     public void Quit()
     {
-        //TODO(patrik): Save the newWords list??
+        SaveWordToFile();
+
         Environment.Exit(0);
     }
     #endregion
@@ -224,7 +270,6 @@ class Program
     /// </summary>
     public void StartGame()
     {
-        //TODO(patrik): Load words from a file
 
         //NOTE(patrik): If their is not any word in the words list then the user can pick a word
         string word = "";
@@ -267,32 +312,14 @@ class Program
     }
 
     /// <summary>
-    /// Prints the message and waits for the user to type something
-    /// </summary>
-    /// <param name="message">The message to be printed</param>
-    /// <returns>Returns true if the user types yes or y and false for everything else</returns>
-    private bool YesNoQuestion(string message)
-    {
-        Console.WriteLine("{0} (yes/no)", message);
-        string answer = Console.ReadLine().Trim().ToLower();
-
-        if(answer == "yes" || answer == "y")
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    /// <summary>
     /// Starts the game and loops here forever
     /// </summary>
     public void Start()
     {
         while (true)
         {
+            LoadWordsFromFile();
+
             MainMenu();
 
             StartGame();
@@ -300,6 +327,7 @@ class Program
             m_StartGame = false;
         }
     }
+
     /// <summary>
     /// Main method of the programs
     /// </summary>

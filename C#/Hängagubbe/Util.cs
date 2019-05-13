@@ -52,4 +52,24 @@ class Util
 
         Console.Write(")");
     }
+
+    /// <summary>
+    /// Prints the message and waits for the user to type something
+    /// </summary>
+    /// <param name="message">The message to be printed</param>
+    /// <returns>Returns true if the user types yes or y and false for everything else</returns>
+    public static bool YesNoQuestion(string message)
+    {
+        Console.WriteLine("{0} (yes/no)", message);
+        string answer = Console.ReadLine().Trim().ToLower();
+
+        if (answer == "yes" || answer == "y")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
