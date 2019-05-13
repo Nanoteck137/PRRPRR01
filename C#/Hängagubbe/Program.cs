@@ -269,6 +269,9 @@ class Program
         // Loop here forever until the user wants the game to start
         while (true)
         {
+            // Clears the console
+            Console.Clear();
+
             // Print the menu
             PrintMenu();
 
@@ -292,9 +295,6 @@ class Program
             // If one of the menu items changes the start game flag so break the loop and start the game
             if (m_StartGame)
                 break;
-
-            // Clears the console
-            Console.Clear();
         }
     }
     #endregion
@@ -325,8 +325,6 @@ class Program
         //NOTE(patrik): Initalizes the game and starts it
         Game game = new Game(word);
         game.Run();
-
-        Console.Clear();
 
         //NOTE(patrik): Checks if the user has won then print something
         if (game.Won)

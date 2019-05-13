@@ -128,6 +128,8 @@ class Game
     {
         get { return m_Won; }
     }
+
+    private char[] m_WordCharacters;
      #endregion
 
     /// <summary>
@@ -142,6 +144,45 @@ class Game
         m_WrongGuesses = new List<string>();
 
         m_Won = false;
+
+        // Create an array to hold the spaces in the word
+        m_WordCharacters = new char[m_Word.Length];
+        for (int i = 0; i < m_Word.Length; i++)
+        {
+            // Keep the spaces in the word
+            if (m_Word[i] == ' ')
+            {
+                m_WordCharacters[i] = ' ';
+            }
+            else
+            {
+                // Every character thats not a space becomes a undercore
+                m_WordCharacters[i] = '_';
+            }
+        }
+    }
+
+    private void Draw()
+    {
+        // Write the ASCII Art
+        Console.WriteLine(s_Art[m_WrongGuesses.Count]);
+
+        // Print the words and characters the user has guessed wrong
+        if (m_WrongGuesses.Count > 0)
+        {
+            Console.WriteLine("Wrong Guesses");
+            foreach (string str in m_WrongGuesses)
+            {
+                Console.Write(str + " ");
+            }
+            Console.WriteLine();
+        }
+
+        // Prints the users progress
+        foreach (char c in m_WordCharacters)
+        {
+            Console.Write(c + " ");
+        }
     }
 
     /// <summary>
@@ -149,22 +190,6 @@ class Game
     /// </summary>
     public void Run()
     {
-        // Create an array to hold the spaces in the word
-        char[] wordChar = new char[m_Word.Length];
-        for (int i = 0; i < m_Word.Length; i++)
-        {
-            // Keep the spaces in the word
-            if (m_Word[i] == ' ')
-            {
-                wordChar[i] = ' ';
-            }
-            else
-            {
-                // Every character thats not a space becomes a undercore
-                wordChar[i] = '_';
-            }
-        }
-
         while (true)
         {
             Console.Clear();
@@ -172,33 +197,15 @@ class Game
             // Debug print the word
             Util.DebugPrintLine(m_Word);
 
+            Draw();
+
+            Console.WriteLine();
+
             // Exit the loop if the user has guesed too meny times
             if (m_WrongGuesses.Count >= s_Art.Length - 1)
             {
                 break;
             }
-
-            // Write the ASCII Art
-            Console.WriteLine(s_Art[m_WrongGuesses.Count]);
-
-            // Print the words and characters the user has guessed wrong
-            if (m_WrongGuesses.Count > 0)
-            {
-                Console.WriteLine("Wrong Guesses");
-                foreach (string str in m_WrongGuesses)
-                {
-                    Console.Write(str + " ");
-                }
-                Console.WriteLine();
-            }
-
-            // Prints the users progress
-            foreach (char c in wordChar)
-            {
-                Console.Write(c + " ");
-            }
-
-            Console.WriteLine();
 
             // If the user has won return from this function
             if (m_Won)
@@ -230,7 +237,7 @@ class Game
                     // If the character matches the first character from the console then add the character to the m_RightGuesses list
                     if (m_Word[i] == word[0])
                     {
-                        wordChar[i] = m_Word[i];
+                        m_WordCharacters[i] = m_Word[i];
                         if (m_RightGuesses.Contains(m_Word[i]))
                             m_RightGuesses.Add(m_Word[i]);
                     }
@@ -244,7 +251,7 @@ class Game
             }
 
             // Check if the user has guessed the word
-            if(m_Word == new string(wordChar))
+            if(m_Word == new string(m_WordCharacters))
             {
                 m_Won = true;
                 continue;
@@ -255,8 +262,8 @@ class Game
         if(!m_Won)
         {
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.WriteLine(s_Art[m_WrongGuesses.Count - 1]);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(s_Art[m_WrongGuesses.Count]);
             Console.ResetColor();
         }
     }
