@@ -32,7 +32,7 @@
   * SVAR: Säkert
 * Är det någon ytterligare funktion du hade velat lägga till men som du saknar kunskaper för att göra?
   * SVAR: Nej, men jag saknade lite tid för att anledningar/Alla behöver hjälp av mig
-* Hur fungerar programmet? 
+* Hur fungerar programmet? ,
   * Beskriv programflödet enkelt med text, punkfrom eller flödesschema.
   * SVAR: TODO
 * Hur väl har du hållit dig till din planering?
@@ -78,10 +78,11 @@
 
 ### Självskattning.
   * Hur mycket tid la du på uppgiften? Var det tillräckligt för att du blev nöjd med resultatet?
-    * Inte tillräkligt för att jag behövde hjälpa så många så jag han inte med så mycket som jag skulle kunna göra
+    * SVAR: Inte tillräkligt för att jag behövde hjälpa så många så jag han inte med så mycket som jag skulle kunna göra
   * Har du lärt dig något under projektets gång?
-    * Inte direkt
+    * SVAR: Inte direkt
   * Nu i efterhand, hade du önskat att du gjort något annorlunda? (Planerat mer/mindre, lagt ned mer tid, varit bättre förberedd, etc.)
+    * SVAR: Vet inte, jag skulle säga bara för att jag kan programmering så var detta en ganska tråkig uppgift.
   * *(Valfritt) Något du vill tillägga eller något du kommit till insikt med under uppgiftens gång?*
   
 <br>
