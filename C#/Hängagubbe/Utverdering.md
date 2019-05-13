@@ -18,10 +18,11 @@
   * SVAR: Programet startar med en meny där användaren t.ex. kan lägga till ord i en lista och sedan starta spelet med ett slumpat ord eller så kan användaren bara starta spelet och välja ordet då. 
 * Stötte du på några problem du fastnade på? 
   * Om ja: Hur löste du dem?
+  * SVAR: Nej jag stötte inte på några problem
 * Var något annat svårt eller utmanande? 
   * SVAR: Att komma på logiken för hur karaktärerna och orden skulle valideras 
 * Var något lätt?
-  * 
+  * SVAR: Vissa saker som menyn var lätta och ganska roligt att göra bara för att jag gjorde den mer "dynamisk" system
 
 * Hade du tillräckligt med förkunskaper? 
   * Om några: Vad saknade du för förkunskaper?
@@ -72,7 +73,7 @@
       * Lång, otydlig och oöverskådlig
       * Tydlig, strukturerad och lättläslig
       * *Egna alternativ.*
-      * SVAR: 
+      * SVAR: Tydlig, Ganska Strukturerad, Ganska Lättläsligt
 
 <br>
 
@@ -84,7 +85,3 @@
   * Nu i efterhand, hade du önskat att du gjort något annorlunda? (Planerat mer/mindre, lagt ned mer tid, varit bättre förberedd, etc.)
     * SVAR: Vet inte, jag skulle säga bara för att jag kan programmering så var detta en ganska tråkig uppgift.
   * *(Valfritt) Något du vill tillägga eller något du kommit till insikt med under uppgiftens gång?*
-  
-<br>
-
-Skriv ihop MAX 2 A4-sidor och ni får gärna svara i punkform. 
