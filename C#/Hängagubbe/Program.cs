@@ -9,9 +9,21 @@ using Newtonsoft.Json;
 /// </summary>
 class MenuItem
 {
+    /// <summary>
+    /// Name of the menu item
+    /// </summary>
     public string name;
+
+    /// <summary>
+    /// Function to execute
+    /// </summary>
     public Action func;
 
+    /// <summary>
+    /// Constructor for menu item
+    /// </summary>
+    /// <param name="name">Name of the menu item used for rendering the menu</param>
+    /// <param name="func">A function for executing the menu item</param>
     public MenuItem(string name, Action func)
     {
         this.name = name;
@@ -74,10 +86,16 @@ class Program
     /// </summary>
     public void LoadWordsFromFile()
     {
+        // Check if the file exists
         if (File.Exists(WORD_FILE_NAME))
         {
+            // Load the content of the file
             string fileContent = File.ReadAllText(WORD_FILE_NAME);
+            
+            // Deserializes the content from the file and creates a object
             JsonWords fileWords = JsonConvert.DeserializeObject<JsonWords>(fileContent);
+
+            // Assign the loaded list to the m_WordList variables
             m_WordList = fileWords.words;
         }
     }
@@ -87,11 +105,16 @@ class Program
     /// </summary>
     public void SaveWordToFile()
     {
+        // Creates a new JsonWords object
         JsonWords fileWords = new JsonWords();
+
+        // Assign the list in the object to our word list
         fileWords.words = m_WordList;
 
+        // Serializes the object to a string
         string fileContent = JsonConvert.SerializeObject(fileWords, Formatting.Indented);
 
+        // Writes the serialized data to the file
         File.WriteAllText(WORD_FILE_NAME, fileContent);
     }
     #endregion
@@ -222,13 +245,16 @@ class Program
     /// </summary>
     public void PrintMenu()
     {
+        // Prints the words list
         Console.Write("Current word list: ");
         Util.PrintList(m_WordList);
         Console.WriteLine();
         Console.WriteLine();
 
+        // Prints the menu items
         Console.WriteLine("---------- Main Menu ----------");
 
+        // Loop through the menu items
         for (int i = 0; i < m_MenuItems.Count; i++)
         {
             Console.WriteLine("{0} - {1}", i + 1, m_MenuItems[i].name);
@@ -240,26 +266,34 @@ class Program
     /// </summary>
     public void MainMenu()
     {
+        // Loop here forever until the user wants the game to start
         while (true)
         {
+            // Print the menu
             PrintMenu();
 
+            // Reads the console for a number to execute a menu items
             int index = 0;
 
             try
             {
-                 index = int.Parse(Console.ReadLine()) - 1;
+                // Tries to parse an int for the index
+                index = int.Parse(Console.ReadLine()) - 1;
             }
             catch
             {
+                // The parsing of the int failed so reset the loop and continue
                 continue;
             }
 
+            // Executes a menu item
             m_MenuItems[index].func();
 
+            // If one of the menu items changes the start game flag so break the loop and start the game
             if (m_StartGame)
                 break;
 
+            // Clears the console
             Console.Clear();
         }
     }
@@ -316,14 +350,19 @@ class Program
     /// </summary>
     public void Start()
     {
+        // Loop here forever
         while (true)
         {
+            // Loads the words from the list
             LoadWordsFromFile();
 
+            // Print the menus
             MainMenu();
 
+            // Start a new game
             StartGame();
 
+            // Reset the start flag back to falses
             m_StartGame = false;
         }
     }
@@ -334,15 +373,19 @@ class Program
     /// <param name="args">Command Line arguments</param>
     static void Main(string[] args)
     {
+        // Checks the command line arguments
         foreach(string arg in args)
         {
+            // If the one of the arguments is --debug then enable some debug printing
             if(arg == "--debug")
             {
                 Util.Debug = true;
             }
         }
 
+        // Creates an instance of the program
         Program program = new Program();
+        // Start the program
         program.Start();
     }
 }
