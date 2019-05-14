@@ -10,7 +10,9 @@ Planering
 
 ## Program Flow
 
-![Program Flow Diagram](Diagram.png) 
+![Program Flow Diagram](Diagram.png)
+
+Diagrammet har inte meny sakerna bara för att dem kom efter att jag gjorde diagrammet men spel logiken är nästan korrect
 
 Variabler (Inte alla)
   - Rätt gissade ord (List string) (Game Class)
