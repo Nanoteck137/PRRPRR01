@@ -84,7 +84,7 @@ class Program
     /// <summary>
     /// Loads the words from a file and sets m_WordList to the loaded list
     /// </summary>
-    public void LoadWordsFromFile()
+    private void LoadWordsFromFile()
     {
         // Check if the file exists
         if (File.Exists(WORD_FILE_NAME))
@@ -103,7 +103,7 @@ class Program
     /// <summary>
     /// Saves word list to a file
     /// </summary>
-    public void SaveWordToFile()
+    private void SaveWordToFile()
     {
         // Creates a new JsonWords object
         JsonWords fileWords = new JsonWords();
@@ -124,7 +124,7 @@ class Program
     /// <summary>
     /// Menu Item: Lets the user to add words
     /// </summary>
-    public void AddWord()
+    private void AddWord()
     {
         while (true)
         {
@@ -166,7 +166,7 @@ class Program
     /// <summary>
     /// Menu Item: Lets the user remove words
     /// </summary>
-    public void RemoveWord()
+    private void RemoveWord()
     {
         Console.Clear();
 
@@ -215,7 +215,7 @@ class Program
     /// <summary>
     /// Menu Item: Clears the whole word list
     /// </summary>
-    public void ClearWordList()
+    private void ClearWordList()
     {
         m_WordList.Clear();
     }
@@ -223,7 +223,7 @@ class Program
     /// <summary>
     /// Menu Item: Starts a game
     /// </summary>
-    public void Play()
+    private void Play()
     {
         m_StartGame = true;
     }
@@ -231,7 +231,7 @@ class Program
     /// <summary>
     /// Menu Item: Quits the program
     /// </summary>
-    public void Quit()
+    private void Quit()
     {
         SaveWordToFile();
 
@@ -243,7 +243,7 @@ class Program
     /// <summary>
     /// Print the menu
     /// </summary>
-    public void PrintMenu()
+    public void DrawMenu()
     {
         // Prints the words list
         Console.Write("Current word list: ");
@@ -273,7 +273,7 @@ class Program
             Console.Clear();
 
             // Print the menu
-            PrintMenu();
+            DrawMenu();
 
             // Reads the console for a number to execute a menu items
             int index = 0;
@@ -302,7 +302,7 @@ class Program
     /// <summary>
     /// Start a single game
     /// </summary>
-    public void StartGame()
+    private void StartGame()
     {
 
         //NOTE(patrik): If their is not any word in the words list then the user can pick a word

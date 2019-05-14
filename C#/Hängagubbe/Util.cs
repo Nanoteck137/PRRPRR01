@@ -9,15 +9,7 @@ using System.Threading.Tasks;
 /// </summary>
 class Util
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    private static bool m_DebugOn = false;
-
-    public static bool Debug { 
-        set { m_DebugOn = value; }
-        get { return m_DebugOn; }
-    }
+    public static bool Debug { set; get; } = false;
 
     /// <summary>
     /// Prints to the console but only if the debug flag is set to true
